@@ -20,4 +20,3 @@ urlpatterns = [
     path('departure/<str:departure>/', DepartureView.as_view()),
     path('tour/<int:id>/', TourView.as_view())
 ]
-
