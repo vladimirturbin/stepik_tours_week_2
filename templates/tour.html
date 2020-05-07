@@ -1,20 +1,8 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>CSSDesk</title>
-    <style type="text/css">
-      
-      body { background-color: #2574b0; }
-      
-      
-    </style>
-  </head>
-  <body>
-    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Snowy Maple Resort  4 ★</title>
+    <title>{{ title }}  {{ stars }} ★</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
@@ -48,17 +36,17 @@
     </nav>
 
 
-    <h1 class="display-3 mt-4" data-test="title">Snowy Maple Resort  4 ★</h1>
+    <h1 class="display-3 mt-4" data-test="title">{{ title }}  {{ stars }} ★</h1>
 
     <!-- HERO -->
 
-    <p class="lead" data-test="lead"><span data-test="country">Индия</span> Из <span data-text="departure">Новосибирска</span> <span data-text="nights">5</span> ночей</p>
+    <p class="lead" data-test="lead"><span data-test="country">{{ country }}</span> <span data-text="departure">{{ departure }}</span> <span data-text="nights">{{ nights }}</span> ночей</p>
 
-    <img data-test="picture" src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" class="w-75" alt="">
+    <img data-test="picture" src={{ picture }} class="w-75" alt="">
     
-    <p class="my-4 w-75" data-test="description">It is beautiful to travel to Iceland in summer and being able to get a swim in the sea and dive in the cold, light-filled waters is a true treasure.  It is a pleasure to make camp in the beautiful countryside, go hiking, ski in summer, have a backpacking vacation where you go in big groups, drink lots of beer and love to hear stories from your friends.  If you're interested, make sure to book a trip from the "green" tour operator Beggars Guide Tours!</p>
+    <p class="my-4 w-75" data-test="description">{{ description }}</p>
 
-    <a href="" class="btn btn-success btn-lg" data-test="buybutton">Купить тур за <span data-test="price">42700</span></a>
+    <a href="" class="btn btn-success btn-lg" data-test="buybutton">Купить тур за <span data-test="price">{{ price }}</span></a>
 </div>
 
 </body>
