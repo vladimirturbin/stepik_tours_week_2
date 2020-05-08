@@ -1,13 +1,26 @@
+from random import sample
+
 from django.shortcuts import render
 from django.views import View
 
-from tours.data import departures, tours
+from tours.data import departures, description, subtitle, title, tours
 
 
 class MainView(View):
     @staticmethod
     def get(request, *args, **kwargs):
-        context = {}
+        context = {
+            'description': description,
+            'subtitle': subtitle,
+            'title': title,
+            'tours': list(),
+        }
+        # делаем list из шести случайных туров
+        for i in sample(list(tours), 6):
+            tour = dict(tours[i])
+            tour['num'] = i
+            context['tours'].append(tour)
+
         return render(request, 'templates/index.html', context)
 
 
