@@ -4,6 +4,7 @@ from random import sample
 from django.http import Http404
 from django.shortcuts import render
 from django.views import View
+from plural_ru import ru
 
 from tours.data import departures, description, subtitle, title, tours
 
