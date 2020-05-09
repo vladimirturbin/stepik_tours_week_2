@@ -16,6 +16,7 @@ class MainView(View):
             'subtitle': subtitle,
             'title': title,
             'tours': list(),
+            'departures': departures,
         }
         # делаем list из шести случайных туров
         for i in sample(list(tours), 6):
@@ -29,6 +30,7 @@ class MainView(View):
 class TourView(View):
     def get(self, request, tour_id, *args, **kwargs):
         context = dict(tours[tour_id])
+        context['departures'] = departures
         context['departure'] = departures[context['departure']][3:]
         return render(request, 'templates/tour.html', context)
 
@@ -40,7 +42,8 @@ class DepartureView(View):
                    'price_max': 0,
                    'nights_min': 365,
                    'nights_max': 0,
-                   'departure': departures[departure][3:]
+                   'departure': departures[departure][3:],
+                   'departures': departures,
                    }
         for i in tours:
             if tours[i]['departure'] == departure:
