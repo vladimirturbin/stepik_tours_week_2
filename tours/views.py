@@ -1,4 +1,3 @@
-from plural_ru import ru
 from random import sample
 
 from django.http import Http404
