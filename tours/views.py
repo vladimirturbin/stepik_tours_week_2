@@ -10,8 +10,7 @@ from tours.data import departures, description, subtitle, title, tours
 
 
 class MainView(View):
-    @staticmethod
-    def get(request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         context = {
             'description': description,
             'subtitle': subtitle,
@@ -28,16 +27,14 @@ class MainView(View):
 
 
 class TourView(View):
-    @staticmethod
-    def get(request, tour_id, *args, **kwargs):
+    def get(self, request, tour_id, *args, **kwargs):
         context = dict(tours[tour_id])
         context['departure'] = departures[context['departure']][3:]
         return render(request, 'templates/tour.html', context)
 
 
 class DepartureView(View):
-    @staticmethod
-    def get(request, departure, *args, **kwargs):
+    def get(self, request, departure, *args, **kwargs):
         departure_tours = list()
         context = {'price_min': 1000000,
                    'price_max': 0,
