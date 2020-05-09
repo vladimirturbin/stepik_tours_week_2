@@ -1,5 +1,7 @@
+from plural_ru import ru
 from random import sample
 
+from django.http import Http404
 from django.shortcuts import render
 from django.views import View
 
@@ -28,15 +30,44 @@ class TourView(View):
     @staticmethod
     def get(request, tour_id, *args, **kwargs):
         context = dict(tours[tour_id])
-        # Я исправил первую заглавную И поля 'departure' на строчную потому,
-        # что "Вьетнам из Екатеринбурга" выглядит эстетично,
-        # А "Вьетнам Из Екатеринбурга" Выглядит Как-То Глупо.
-        context['departure'] = 'и' + departures[context['departure']][1:]
+        context['departure'] = departures[context['departure']][3:]
         return render(request, 'templates/tour.html', context)
 
 
 class DepartureView(View):
     @staticmethod
     def get(request, departure, *args, **kwargs):
-        context = {}
+        departure_tours = list()
+        context = {'price_min': 1000000,
+                   'price_max': 0,
+                   'nights_min': 365,
+                   'nights_max': 0,
+                   'departure': departures[departure][3:]
+                   }
+        for i in tours:
+            if tours[i]['departure'] == departure:
+                tour = dict(tours[i])
+
+                context['nights_max'] = \
+                    max(context['nights_max'], tours[i]['nights'])
+                context['nights_min'] = \
+                    min(context['nights_min'], tours[i]['nights'])
+                context['price_max'] = \
+                    max(context['price_max'], tours[i]['price'])
+                context['price_min'] = \
+                    min(context['price_min'], tours[i]['price'])
+
+                tour['num'] = i
+
+                departure_tours.append(tour)
+        if departure not in departures:
+            raise Http404("Departure does not exist")
+        q = len(departure_tours)
+        if q == 0:
+            raise Http404("There isn't active tours on this departure")
+
+        context['tours'] = departure_tours
+        context['tours_quantity'] = str(q) + ' ' + ru(q, ('тур',
+                                                          'тура',
+                                                          'туров'))
         return render(request, 'templates/departure.html', context)
